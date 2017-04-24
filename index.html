@@ -1,28 +1,33 @@
 <html>
+
 <head>
     <style>
-        html{
-            width:100%;
-            height:100%;
+        html {
+            width: 100%;
+            height: 100%;
         }
-        body{
-            margin:0;padding:0;
-            height:100%;
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
     </style>
 </head>
+
 <body>
     <div id="main"></div>
 </body>
 <script type="text/javascript">
     var arg = new Object;
-    var pair=location.search.substring(1).split("&");
-    for(var i=0;pair[i];i++){
-        var kv = pair[i].split("=");
-        arg[kv[0]]=kv[1];
+    var pair = location.search.substring(1).split("&");
+    for (var i = 0; pair[i]; i++) {
+        var param = pair[i].split("=");
+        arg[param[0]] = param[1];
     }
     var main = document.getElementById("main");
-    const mastdn = "<webview id=\"webView\" src=\""+arg.url+"\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
+    const mastdn = "<webview id=\"webView\" src=\"" + arg.url + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
     main.innerHTML = mastdn;
+
 </script>
 <html>
