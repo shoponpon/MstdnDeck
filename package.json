@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "Shoponpon",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "electron-config": "^0.2.1"
   }
