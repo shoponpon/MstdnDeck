@@ -43,16 +43,24 @@ app.on("ready", function () {
         {
             label: "MstdnDeck",
             submenu: [
-                { label: "About MstdnDeck", click:function(){
-                    openAboutWindow({icon_path:join(__dirname,"img/icon.png"),copyright:"Copyright (c) 2017 Shoponpon"});
-                }},
+                {
+                    label: "About MstdnDeck", click: function () {
+                        openAboutWindow({
+                            icon_path: join(__dirname, "img/icon.png"),
+                            copyright: "Copyright (c) 2017 Shoponpon",
+                            bug_report_url: "https://pawoo.net/@shopon",
+                            adjust_window_size: false,
+                        });
+                    }
+                },
+                { label: "Quit", accelerator: "Command+Q", click: function () { app.quit(); } },
             ],
         },
         {
             label: "View",
             submenu: [
                 { label: "Reload", accelerator: "Command+R", click: function () { mainWindow.reload() } },
-                { label: "Close", accelerator: "Command+W", click: function(){mainWindow.hide()}},
+                { label: "Close", accelerator: "Command+W", click: function () { mainWindow.hide() } },
             ],
         }
     ]);
