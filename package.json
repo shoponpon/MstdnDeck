@@ -1,0 +1,15 @@
+{
+  "name": "mstdndeck",
+  "version": "1.0.0",
+  "description": "mastdonをelectronで表示するだけ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "OishiSho",
+  "license": "ISC",
+  "dependencies": {
+    "electron-config": "^0.2.1"
+  }
+}
