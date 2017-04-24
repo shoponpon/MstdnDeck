@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "OishiSho",
+  "author": "Shoponpon",
   "license": "ISC",
   "dependencies": {
     "electron-config": "^0.2.1"
