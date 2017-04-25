@@ -28,7 +28,6 @@ app.on("window-all-closed", function () {
 
 app.on("ready", function () {
     const { width, height, x, y } = config.get('bounds');
-    const url = config.get("url");
     mainWindow = new BrowserWindow({
         title: "MstdnDeck",
         width,
@@ -36,7 +35,7 @@ app.on("ready", function () {
         x,
         y
     });
-    mainWindow.loadURL("file://" + __dirname + "/index.html?url=" + url);
+    mainWindow.loadURL("file://" + __dirname + "/index.html");
 
     var menu = Menu.buildFromTemplate([
         {
@@ -92,7 +91,14 @@ app.on("ready", function () {
         mainWindow.webContents.send("instance-url", url);
     });
     
-    showChangeInstanceWindow();
+    const url = config.get("url");
+    if(url == void 0){
+        showChangeInstanceWindow();
+    }else{
+        mainWindow.webContents.on("did-finish-load",function(){
+            mainWindow.webContents.send("instance-url",url);
+        });
+    }
 });
 
 function showChangeInstanceWindow() {
