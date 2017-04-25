@@ -21,9 +21,16 @@
 </body>
 <script type="text/javascript">
     const ipc = require("electron").ipcRenderer;
+    var currentURL;
     ipc.on("instance-url",(ev,url)=>{
-    const mstdn = "<webview id=\"webView\" src=\"" + url + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
-    main.innerHTML = mstdn;
+        currentURL = url;
+        const mstdn = "<webview id=\"webView\" src=\"" + currentURL + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
+        main.innerHTML = mstdn;
+    });
+
+    ipc.on("reload-flag",(ev,flag)=>{
+        const mstdn = "<webview id=\"webView\" src=\"" + currentURL + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
+        main.innerHTML = mstdn;
     });
 </script>
 <html>
