@@ -88,10 +88,11 @@ app.on("ready", function () {
     });
 
     ipc.on("instance-url", (ev, url) => {
+        config.set("url",url);
         mainWindow.webContents.send("instance-url", url);
     });
     
-    const url = config.get("url");
+    var url = config.get("url");
     if(url == void 0){
         showChangeInstanceWindow();
     }else{
