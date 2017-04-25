@@ -3,11 +3,11 @@ const Config = require("electron-config");
 const openAboutWindow = require("electron-about-window").default;
 const join = require("path").join;
 const app = electron.app;
+const ipc = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 
 var forceQuit = false;
-
 var mainWindow = null;
 
 var config = new Config({
@@ -20,7 +20,6 @@ var config = new Config({
     }
 });
 
-//全てのウィンドウが閉じた
 app.on("window-all-closed", function () {
     if (process.platform != "darwin") {
         app.quit();
@@ -31,7 +30,7 @@ app.on("ready", function () {
     const { width, height, x, y } = config.get('bounds');
     const url = config.get("url");
     mainWindow = new BrowserWindow({
-        title: "MstdnDeck(" + url + ")",
+        title: "MstdnDeck",
         width,
         height,
         x,
@@ -53,6 +52,11 @@ app.on("ready", function () {
                         });
                     }
                 },
+                {
+                    label: "Change Instance...", click: function () {
+                        showChangeInstanceWindow();
+                    }
+                },
                 { label: "Quit", accelerator: "Command+Q", click: function () { app.quit(); } },
             ],
         },
@@ -66,7 +70,6 @@ app.on("ready", function () {
     ]);
     Menu.setApplicationMenu(menu);
 
-    //バツボタン
     mainWindow.on("close", function (e) {
         if (!forceQuit) {
             e.preventDefault();
@@ -74,15 +77,28 @@ app.on("ready", function () {
         }
     });
 
-    //cmd+q
     app.on("before-quit", function (e) {
-        //ウィンドウのサイズと位置を保存
         config.set("bounds", mainWindow.getBounds());
         forceQuit = true;
     });
 
-    //dockのアイコンをクリック
     app.on("activate", function () {
         mainWindow.show();
     });
+
+    ipc.on("instance-url", (ev, url) => {
+        mainWindow.webContents.send("instance-url", url);
+    });
+    
+    showChangeInstanceWindow();
 });
+
+function showChangeInstanceWindow() {
+    const selectionPagePath = join("file://" + __dirname + "/selection.html");
+    const selectionWindow = new BrowserWindow({
+        width: 300,
+        height: 250,
+    });
+    selectionWindow.loadURL(selectionPagePath);
+    selectionWindow.show();
+}

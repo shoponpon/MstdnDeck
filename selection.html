@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <meta charset="utf8" />
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: 'Roboto Mono', monospace;
+            background-color: #1d2028;
+            color: #8aa2b8;
+        }
+        
+        #instanceTextFormWrap {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        #instanceTextForm {
+            background: transparent;
+            box-sizing: border-box;
+            border: 0;
+            color: #fff;
+            padding: 7px 4px;
+            box-shadow: none;
+            outline: 0;
+            border-bottom: 2px solid #9baec8;
+            border-radius: 2px 2px 0 0;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        #instanceTextForm:focus:invalid {
+            border-bottom-color: #df405a;
+        }
+        
+        #instanceTextForm:required:valid {
+            border-bottom-color: #79bd9a;
+        }
+        
+        #instanceButton {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            display: block;
+            border: 0;
+            border-radius: 4px;
+            background: #2b90d9;
+            color: #fff;
+            padding: 10px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: 500;
+            outline: 0;
+            margin-bottom: 10px
+        }
+        
+        #instanceButton:hover {
+            background-color: #419bdd;
+        }
+        
+        #closeLink {
+            color: white;
+            opacity: 0.7;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            text-decoration: none;
+            color: #8aa2b8;
+        }
+    </style>
+    <script type="text/javascript">
+        function sendURL(){
+            var ipc = require("electron").ipcRenderer;
+            var url = document.getElementById("instanceTextForm").value;
+            ipc.send("instance-url",url);
+            window.close();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="instanceTextFormWrap">
+        <form onsubmit="sendURL();return false;">
+            <p>どのインスタンスに接続しますか？</p>
+            <div id="formWrap">
+                <input type="text" id="instanceTextForm" required="required" autofocus="autofocus" placeholder="例:http://pawoo.net"></input>
+            </div>
+            <button type="submit" id="instanceButton">接続する</button>
+        </form>
+    </div>
+    <a id="closeLink" href="javascript:window.close()">ウィンドウを閉じる</a>
+</body>
+<html>
