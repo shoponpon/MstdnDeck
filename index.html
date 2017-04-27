@@ -13,24 +13,37 @@
             padding: 0;
             height: 100%;
         }
+
+        #mstdnView {
+            display:inline-flex;
+            width:100%;
+            height:100%;
+        }
     </style>
 </head>
 
 <body>
-    <div id="main"></div>
+    <div id="app">
+        <webView id="mstdnView"></webView>
+    </div>
 </body>
 <script type="text/javascript">
     const ipc = require("electron").ipcRenderer;
+    const mstdnView = document.getElementById("mstdnView");
     var currentURL;
+
     ipc.on("instance-url",(ev,url)=>{
         currentURL = url;
-        const mstdn = "<webview id=\"webView\" src=\"" + currentURL + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
-        main.innerHTML = mstdn;
+        mstdnView.setAttribute("src", currentURL);
     });
 
     ipc.on("reload-flag",(ev,flag)=>{
-        const mstdn = "<webview id=\"webView\" src=\"" + currentURL + "\" style=\"display:inline-flex;width:100%;height:100%;\"></webview>";
-        main.innerHTML = mstdn;
+        mstdnView.setAttribute("src", currentURL);
+    });
+    
+    mstdnView.addEventListener("new-window",function(e){
+        console.log('Guest window is openning new window: ' + e.url);
+        require("electron").shell.openExternal(e.url);
     });
 </script>
 <html>
