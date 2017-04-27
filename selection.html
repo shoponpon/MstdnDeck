@@ -97,7 +97,7 @@
         <form onsubmit="sendURL();return false;">
             <p>どのインスタンスに接続しますか？</p>
             <div id="formWrap">
-                <input type="text" id="instanceTextForm" required="required" autofocus="autofocus" placeholder="例:https://pawoo.net"></input>
+                <input type="url" id="instanceTextForm" required="required" autofocus="autofocus" pattern="^http(|s)://[0-9a-zA-Z/#&?%\.\-\+_=]+$" placeholder="例:https://pawoo.net"></input>
             </div>
             <button type="submit" id="instanceButton">接続する</button>
         </form>
