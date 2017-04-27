@@ -67,6 +67,12 @@ app.on("ready", function () {
                 } },
                 { label: "Close", accelerator: "Command+W", click: function () { mainWindow.hide(); } },
             ],
+        },
+        {
+            label: "Help",
+            submenu: [
+                { label: "Oepn DevTools", accelerator: "Ctrl+Shift+i", click: function(){ mainWindow.webContents.openDevTools(); }},
+            ],
         }
     ]);
     Menu.setApplicationMenu(menu);
