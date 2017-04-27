@@ -42,7 +42,6 @@
     });
     
     mstdnView.addEventListener("new-window",function(e){
-        console.log('Guest window is openning new window: ' + e.url);
         require("electron").shell.openExternal(e.url);
     });
 </script>
