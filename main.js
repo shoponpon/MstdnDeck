@@ -12,7 +12,6 @@ var mainWindow = null;
 
 var config = new Config({
     defaults: {
-        url: "https://pawoo.net/",
         bounds: {
             width: 600,
             height: 800,
@@ -88,9 +87,11 @@ app.on("ready", function () {
             ],
         },
         {
-            label: "Help",
+            label: "Dev",
             submenu: [
                 { label: "Oepn DevTools", accelerator: "Ctrl+Shift+i", click: function () { mainWindow.webContents.openDevTools(); } },
+                { label: "Delete Config", click: function () { config.clear() } },
+                { label: "Delete Cache", click: function () { electron.session.defaultSession.clearCache(() => { }); } },
             ],
         }
     ]);
