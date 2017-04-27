@@ -60,18 +60,37 @@ app.on("ready", function () {
             ],
         },
         {
+            label: "Edit",
+            submenu: [
+                { role: "undo" },
+                { role: "redo" },
+                { type: "separator" },
+                { role: "cut" },
+                { role: "copy" },
+                { role: "paste" },
+                { type: "separator" },
+                { role: "selectall" },
+            ],
+        },
+        {
             label: "View",
             submenu: [
-                { label: "Reload", accelerator: "Command+R", click: function () { 
-                    mainWindow.webContents.send("reload-flag", "reload");
-                } },
+                {
+                    label: "Reload", accelerator: "Command+R", click: function () {
+                        mainWindow.webContents.send("reload-flag", "reload");
+                    }
+                },
                 { label: "Close", accelerator: "Command+W", click: function () { mainWindow.hide(); } },
+                { type: "separator" },
+                { role: "zoomin" },
+                { role: "zoomout" },
+                { role: "resetzoom" }
             ],
         },
         {
             label: "Help",
             submenu: [
-                { label: "Oepn DevTools", accelerator: "Ctrl+Shift+i", click: function(){ mainWindow.webContents.openDevTools(); }},
+                { label: "Oepn DevTools", accelerator: "Ctrl+Shift+i", click: function () { mainWindow.webContents.openDevTools(); } },
             ],
         }
     ]);
@@ -94,16 +113,16 @@ app.on("ready", function () {
     });
 
     ipc.on("instance-url", (ev, url) => {
-        config.set("url",url);
+        config.set("url", url);
         mainWindow.webContents.send("instance-url", url);
     });
-    
+
     var url = config.get("url");
-    if(url == void 0){
+    if (url == void 0) {
         showChangeInstanceWindow();
-    }else{
-        mainWindow.webContents.on("did-finish-load",function(){
-            mainWindow.webContents.send("instance-url",url);
+    } else {
+        mainWindow.webContents.on("did-finish-load", function () {
+            mainWindow.webContents.send("instance-url", url);
         });
     }
 });
