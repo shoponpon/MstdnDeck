@@ -134,6 +134,8 @@ function showChangeInstanceWindow() {
     const selectionWindow = new BrowserWindow({
         width: 300,
         height: 250,
+        parent:mainWindow,
+        modal:true,
     });
     selectionWindow.loadURL(selectionPagePath);
     selectionWindow.show();
