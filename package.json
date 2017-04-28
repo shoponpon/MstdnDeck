@@ -1,6 +1,6 @@
 {
   "name": "MstdnDeck",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MastodonをElectronで表示するだけ",
   "main": "main.js",
   "scripts": {
