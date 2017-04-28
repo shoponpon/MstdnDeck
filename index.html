@@ -14,17 +14,130 @@
             height: 100%;
         }
         
+        #app {
+            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        #instanceColumn {
+            background-color: #353a49;
+            padding: 3px;
+            width: 70px;
+            height: 100%;
+            float: left;
+        }
+        
+        #mstdnColumn {
+            float: left;
+            position: absolute;
+            left: 70px;
+            width: 100%;
+            height: 100%;
+        }
+        
         #mstdnView {
             display: inline-flex;
             width: 100%;
             height: 100%;
+        }
+        
+        .instanceRadio {
+            display: none;
+        }
+        
+        .instanceLabel {
+            float: inherit;
+            display: block;
+            background-color: white;
+            color: #313543;
+            opacity: 0.5;
+            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            font-size: 35px;
+            font-family: 'Roboto Mono', monospace;
+            margin: 10px;
+            font-weight: 100;
+            line-height: 50px;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+        
+        .instanceLabel:hover {
+            border: 4px solid gray;
+            margin: 6px;
+        }
+        
+        .instanceRadio:checked+label {
+            opacity: 0.8;
+        }
+        
+        .instanceAddButton {
+            float: inherit;
+            display: block;
+            background-color: white;
+            color: #313543;
+            opacity: 0.5;
+            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            font-size: 35px;
+            font-family: 'Roboto Mono', monospace;
+            margin: 10px;
+            font-weight: 100;
+            line-height: 40px;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            border: none;
+        }
+        
+        .instanceAddButton:hover {
+            line-height: 20px;
+            border: 4px solid gray;
+        }
+        
+        .instanceAddButton:active {
+            background: #ccc;
+        }
+        
+        .instanceAddButton:focus {
+            outline: 0;
+        }
+        
+        .instanceButtonLabel {
+            display: block;
+            font-size: 15px;
+            font-family: 'Roboto Mono', monospace;
+            text-align: center;
+            color: gray;
+            opacity: 50%;
+            margin: 0%;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <webView id="mstdnView"></webView>
+        <div id="instanceColumn">
+            <input type="radio" class="instanceRadio" id="1" name="instance">
+            <label for="1" class="instanceLabel">m</label>
+            <div class="instanceButtonLabel">#1</div>
+            <input type="radio" class="instanceRadio" id="2" name="instance">
+            <label for="2" class="instanceLabel">p</label>
+            <div class="instanceButtonLabel">#2</div>
+            <button class="instanceAddButton" onclick="showSelectInstanceWindow();">+</button>
+            <div class="instanceButtonLabel">Add</div>
+        </div>
+        <div id="mstdnColumn">
+            <webView id="mstdnView"></webView>
+        </div>
     </div>
 </body>
 <script type="text/javascript">
@@ -48,9 +161,12 @@
     window.addEventListener("load", () => {
         require("electron-context-menu")({
             window: document.getElementById("mstdnView"),
-            showInspectElement:false
+            showInspectElement: false
         });
     });
 
+    function showSelectInstanceWindow(){
+        ipc.send("open-select-instance","open");
+    }
 </script>
 <html>

@@ -129,6 +129,10 @@ app.on("ready", function () {
     }
 });
 
+ipc.on("open-select-instance",function(e,arg){
+    showChangeInstanceWindow();
+});
+
 function showChangeInstanceWindow() {
     const selectionPagePath = join("file://" + __dirname + "/selection.html");
     const selectionWindow = new BrowserWindow({
