@@ -106,6 +106,7 @@ app.on("ready", function () {
 
     app.on("before-quit", function (e) {
         config.set("bounds", mainWindow.getBounds());
+        electron.session.defaultSession.clearCache(() => { });
         forceQuit = true;
     });
 
