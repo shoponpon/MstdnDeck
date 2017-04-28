@@ -8,7 +8,7 @@ Can open Mastodon like the TweetDeck App for OSX.
 
 # Download
 ## 1.0.1 
-https://www.dropbox.com/s/zdxprtz0akzf4q3/MstdnDeck-darwin-x64-1.0.1.zip
+https://goo.gl/hcGcSV
 
 # Update
 ## 1.0.1
